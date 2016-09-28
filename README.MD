@@ -7,8 +7,8 @@ This is an adapter for [seneca-web](https://github.com/senecajs/seneca-web/) usi
 
 ## Installation
 
-Peer dependencies have been specified for `hapi`, and `seneca-web`
-They need to be present for this to work at all.
+A peer dependency has been specified `seneca-web`
+And of course `hapi` must be present for this to work at all.
 
 ```
 npm install --save hapi

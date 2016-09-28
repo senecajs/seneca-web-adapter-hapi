@@ -1,6 +1,6 @@
 {
   "name": "seneca-web-adapter-hapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "seneca-web adapter for hapi",
   "keywords": [
     "seneca",
@@ -45,8 +45,7 @@
     "lodash": "^4.15.0"
   },
   "peerDependencies": {
-    "seneca-web": "^1.0.0",
-    "hapi": "^15.0.3"
+    "seneca-web": "^1.0.0"
   },
   "devDependencies": {
     "code": "^3.0.2",
