@@ -20,7 +20,7 @@ describe('hapi', () => {
 
   beforeEach(done => {
     server = new Hapi.Server()
-    si = Seneca({log: 'test'})
+    si = Seneca({log: 'silent'})
     si.use(Web, {adapter: require('..'), context: server})
     server.connection({port: 3000})
     server.start(done)
@@ -94,6 +94,41 @@ describe('hapi', () => {
           expect(body).to.be.equal({res: 'ping!'})
           done()
         })
+      })
+    })
+  })
+
+  it('passes errors back to caller', done => {
+    var config = {
+      routes: {
+        pin: 'role:test,cmd:*',
+        map: {
+          boom: true
+        }
+      }
+    }
+
+    server.ext('onPreResponse', (request, reply) => {
+      const err = request.response
+      if (!err.isBoom) {
+        return reply.continue()
+      }
+      reply({message: err.orig.message}).code(400)
+    })
+
+    si.add('role:test,cmd:boom', (msg, reply) => {
+      reply(new Error('aw snap!'))
+    })
+
+    si.act('role:web', config, (err, reply) => {
+      if (err) return done(err)
+
+      Request('http://127.0.0.1:3000/boom', (err, res, body) => {
+        if (err) return done(err)
+        body = JSON.parse(body)
+        expect(res.statusCode).to.equal(400)
+        expect(body).to.be.equal({message: 'aw snap!'})
+        done()
       })
     })
   })
