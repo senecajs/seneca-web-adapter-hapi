@@ -113,7 +113,7 @@ describe('hapi', () => {
       if (!err.isBoom) {
         return reply.continue()
       }
-      reply({message: err.orig.message}).code(400)
+      reply({message: err.orig.message.replace('gate-executor: ', '')}).code(400)
     })
 
     si.add('role:test,cmd:boom', (msg, reply) => {
