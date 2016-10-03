@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "seneca-web-adapter-hapi.js",
   "scripts": {
-    "test": "lab -v -L -t 70 -m 5000",
+    "test": "lab -v -L -t 80 -m 5000",
     "test-debug": "node --debug-brk=5858 node_modules/lab/bin/lab -v -m 5000000",
     "coveralls": "lab -s -r lcov | coveralls",
     "coverage": "lab -v -L -r html > docs/coverage.html",
