@@ -1,6 +1,6 @@
 {
   "name": "seneca-web-adapter-hapi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "seneca-web adapter for hapi",
   "keywords": [
     "seneca",
