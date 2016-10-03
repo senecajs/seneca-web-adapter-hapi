@@ -32,7 +32,7 @@
     "lodash": "^4.15.0"
   },
   "peerDependencies": {
-    "seneca-web": "^1.0.0"
+    "seneca-web": "^1.0.0 || ^2.0.0"
   },
   "devDependencies": {
     "code": "^3.0.2",
