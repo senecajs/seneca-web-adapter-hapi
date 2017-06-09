@@ -9,7 +9,13 @@ module.exports = function hapi (options, context, auth, routes, done) {
     return done(new Error('no context provided'))
   }
 
+  const logger = seneca.log.hasOwnProperty(options.loglevel)
+    ? seneca.log[options.loglevel]
+    : () => {}
+
   _.each(routes, (route) => {
+    logger(`Mounting ${route.methods.join(', ')}: ${route.path}`)
+
     if (!route.auth && !route.secure) {
       unsecuredRoute(seneca, context, route)
     }
