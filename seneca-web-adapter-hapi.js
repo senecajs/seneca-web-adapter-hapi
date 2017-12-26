@@ -2,27 +2,25 @@
 
 const _ = require('lodash')
 
-module.exports = function hapi (options, context, auth, routes, done) {
+module.exports = function hapi(options, context, auth, routes, done) {
   const seneca = this
 
   if (!context) {
     return done(new Error('no context provided'))
   }
 
-  _.each(routes, (route) => {
+  _.each(routes, route => {
     if (!route.auth && !route.secure) {
       unsecuredRoute(seneca, context, route)
-    }
-    else if (route.auth) {
+    } else if (route.auth) {
       authRoute(seneca, context, route)
     }
   })
 
-  done(null, {routes: routes})
+  done(null, { routes: routes })
 }
 
-
-function handleRoute (seneca, request, reply, route) {
+function handleRoute(seneca, request, reply, route) {
   const payload = {
     request$: request,
     response$: reply,
@@ -55,7 +53,7 @@ function handleRoute (seneca, request, reply, route) {
   })
 }
 
-function unsecuredRoute (seneca, context, route) {
+function unsecuredRoute(seneca, context, route) {
   context.route({
     method: route.methods,
     path: route.path,
@@ -65,7 +63,7 @@ function unsecuredRoute (seneca, context, route) {
   })
 }
 
-function authRoute (seneca, context, route) {
+function authRoute(seneca, context, route) {
   context.route({
     method: route.methods,
     path: route.path,
