@@ -17,11 +17,12 @@
   "license": "MIT",
   "main": "seneca-web-adapter-hapi.js",
   "scripts": {
-    "test": "lab -v -L -t 80 -m 5000",
+    "test": "lab -v -L -t 80 -m 5000 -I WebAssembly",
     "test-debug": "node --debug-brk=5858 node_modules/lab/bin/lab -v -m 5000000",
-    "coveralls": "lab -s -r lcov | coveralls",
-    "coverage": "lab -v -L -r html > docs/coverage.html",
-    "annotate": "docco web.js -o docs/annotated"
+    "coveralls": "lab -s -r lcov -I WebAssembly | coveralls",
+    "coverage": "lab -v -L -r html -I WebAssembly > docs/coverage.html",
+    "annotate": "docco web.js -o docs/annotated",
+    "prettier": "prettier --write --no-semi --single-quote seneca-web-adapter-hapi.js test/*.js"
   },
   "files": [
     "LICENSE",
@@ -44,7 +45,7 @@
     "hapi": "^15.0.3",
     "hapi-auth-basic": "^4.2.0",
     "lab": "^11.0.1",
-    "pre-commit": "^1.1.3",
+    "prettier": "^1.9.2",
     "request": "^2.74.0",
     "seneca": "plugin",
     "seneca-web": "github:senecajs/seneca-web"
@@ -52,8 +53,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/senecajs/seneca-web-adapter-hapi.git"
-  },
-  "pre-commit": [
-    "test"
-  ]
+  }
 }
